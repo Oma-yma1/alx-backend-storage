@@ -1,6 +1,6 @@
 -- SQL script that creates a stored procedure ComputeAverageWeightedScoreForUsers
 DROP PROCEDURE IF EXISTS ComputeAverageWeightedScoreForUsers;
-DELIMITER |
+DELIMITER //
 CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
 BEGIN
   UPDATE users AS Us, 
@@ -12,4 +12,5 @@ BEGIN
   AS WAt
   SET Us.average_score = WAt.we_avg 
   WHERE Us.id=WAt.id;
-END;
+END //
+DELIMITER;
