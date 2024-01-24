@@ -21,8 +21,8 @@ def data_cacher(method: Callable) -> Callable:
             return res.decode('utf-8')
         res = method(url)
         redis_store.set(f'count:{url}', 0)
-        redis_store.setex(f'res:{url}', 10, res)
-        return res
+        redis_store.setex(f'result:{url}', 10, res)
+        return result
     return wrapr
 
 
