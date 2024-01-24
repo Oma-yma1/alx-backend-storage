@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Implementing an expiring web cache and tracker"""
+"""implementing an expiring web cache and tracker"""
 import redis
 import requests
 from functools import wraps
@@ -11,10 +11,10 @@ redis_store = redis.Redis()
 
 
 def data_cacher(method: Callable) -> Callable:
-    """function cacher data"""
+    """function cahcer data"""
     @wraps(method)
-    def wrapr(url) -> str:
-        """wrapper function"""
+    def wrapper(url) -> str:
+        """function wrapper"""
         redis_store.incr(f'count:{url}')
         result = redis_store.get(f'result:{url}')
         if result:
@@ -23,10 +23,10 @@ def data_cacher(method: Callable) -> Callable:
         redis_store.set(f'count:{url}', 0)
         redis_store.setex(f'result:{url}', 10, result)
         return result
-    return wrapr
+    return wrapper
 
 
 @data_cacher
 def get_page(url: str) -> str:
-    """return url"""
+    """function return url"""
     return requests.get(url).text
