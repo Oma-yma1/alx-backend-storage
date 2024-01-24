@@ -28,7 +28,7 @@ def replay(method: Callable) -> None:
     inputs = redis_dab.lrange(methode_name + ":inputs", 0, -1)
     outputs = redis_dab.lrange(methode_name + ":outputs", 0, -1)
 
-    print(f"{meth_name} was called {len(inputs)} times:")
+    print(f"{methode_name} was called {len(inputs)} times:")
     for input, output in zip(inputs, outputs):
         input = input.decode("utf-8")
         output = output.decode("utf-8")
